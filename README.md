@@ -1,72 +1,55 @@
-<<<<<<< HEAD
-# Spatialverse
-=======
-# SpatialVerse — Interactive 3D Product Experience
+# 🟢SpatialVerse — Aura One🎧
 
-An Apple-style product landing page for a concept headphone, **Aura One**, focused on 3D and motion.
+An immersive 3D product experience built around **Aura One**, a conceptual next-generation headphone design. SpatialVerse combines interactive 3D visuals, scroll-driven animations, and a modern interface to create an engaging product exploration experience.
 
-- **Rotate and zoom** the headphone in 3D (drag, scroll or pinch inside the viewer), with a **Reset view** button
-- **Scroll story:** the product rotates and moves while text steps fade in and out (GSAP ScrollTrigger)
-- **Colour picker:** the 3D material blends smoothly to the chosen colour, shared across both scenes
-- **Feature cards** stagger into view and lift on hover (Framer Motion)
-- Light, Apple-style theme so the product stands out
+## ✨ Features
 
-**Tech stack:** React.js, Vite, Three.js, React Three Fiber, @react-three/drei, GSAP + ScrollTrigger, Framer Motion, Tailwind CSS v4
+- **Interactive 3D Headphones:** Explore a procedurally created 3D headphone model.
+- **Scroll-Driven Animations:** Experience cinematic product movements and transitions while scrolling.
+- **Customisation:** Switch between different headphone colours in real time.
+- **3D Product Viewer:** Rotate and inspect the headphones from different angles.
+- **Feature Highlights:** Discover key product features through animated content cards.
+- **Smooth Animations:** Enjoy fluid transitions and interactive UI elements.
+- **Responsive Interface:** A clean layout designed for different screen sizes.
 
-## Run locally
+## 🛠️ Tech Stack
 
-```bash
-npm install
-npm run dev      # http://localhost:5173
-npm run build    # production build in dist/
-npm run preview  # serve the production build
-```
+| Technology | Purpose |
+|---|---|
+| React | Component-based UI development |
+| Vite | Development server and build tool |
+| Three.js | 3D graphics and rendering |
+| React Three Fiber | Integrating Three.js with React |
+| Drei | Helpers and utilities for 3D scenes |
+| GSAP | Scroll-based animations and transitions |
+| Framer Motion | UI animations and interactions |
+| Tailwind CSS | Styling and responsive layouts |
 
-## Deploy (Vercel)
+## ⚙️ Core Functionality
 
-1. Push this folder to a GitHub repository.
-2. On vercel.com, choose **Add New → Project**, import the repo, and keep the detected **Vite** settings (build: `npm run build`, output: `dist`).
-3. Click **Deploy**.
+### 1. Procedural 3D Model
+The headphone model is constructed using Three.js geometries and materials, allowing its appearance and components to be customised programmatically.
 
-## Project structure
+### 2. Scroll-Based Product Storytelling
+GSAP and ScrollTrigger control the model's movement, rotation, and scale as users scroll through the product presentation.
 
-```
-src/
-├── App.jsx                    # Page layout; owns the selected colour (shared state)
-├── main.jsx / index.css       # Entry point + Tailwind setup
-├── data/products.js           # Colours, feature titles and scroll-story text
-└── components/
-    ├── Headphones.jsx         # Procedural 3D model (Three.js primitives)
-    ├── ProductStage.jsx       # Shared lights + contact shadow for every canvas
-    ├── ScrollShowcase.jsx     # Sticky canvas + scrubbed GSAP ScrollTrigger timeline
-    ├── ExploreViewer.jsx      # Interactive viewer (OrbitControls) + colour picker
-    ├── ColorPicker.jsx        # Accessible radio-group swatches with Framer Motion
-    ├── FeatureCards.jsx       # Staggered whileInView feature grid
-    ├── Hero.jsx / Navbar.jsx
-```
+### 3. Interactive Product Customisation
+React state manages the selected headphone colour and updates the 3D model dynamically.
 
-## Components
+### 4. 3D Exploration
+React Three Fiber and Drei provide an interactive viewer with orbit controls, allowing users to rotate and inspect the product.
 
-| Component | Props | Notes |
-|---|---|---|
-| `Headphones` | `color` (hex), `motion` (optional ref) | With `motion`, follows `{ rotationY, rotationX, positionX, scale }` set by GSAP; without it, idles with a gentle sway. Colour changes are lerped every frame. |
-| `ProductStage` | `children` | Lighting and floor shadow, so all scenes look the same. |
-| `ScrollShowcase` | `color` | 300vh section with a sticky canvas; one scrubbed timeline animates the model and the text steps. |
-| `ExploreViewer` | `color`, `onColorChange` | Bounded canvas with `OrbitControls` (zoom limited to 3–8 units, pan disabled); **Reset view** calls `controls.reset()`. |
-| `ColorPicker` | `value`, `onChange` | `role="radiogroup"`; the active ring animates between swatches using a shared `layoutId`. |
-| `FeatureCards` | none | Reads `FEATURES` from `data/products.js`. |
+### 5. Animated Feature Sections
+Framer Motion adds entrance animations, hover interactions, and smooth transitions to the feature cards and interface.
 
-## Design decisions
 
-- **GSAP for scroll, Framer Motion for UI.** GSAP's scrubbed timelines suit scroll-linked 3D motion; Framer Motion handles component-level micro-interactions (hover, tap, enter-on-view, shared layout).
-- **GSAP animates a plain object, not the mesh.** The timeline tweens `{ rotationY, positionX, … }`, and the model eases toward those values in `useFrame`. This keeps React rendering and the WebGL frame loop decoupled, and stays smooth even when scroll input is jumpy.
-- **Procedural model.** Built from torus and cylinder primitives, so there's no model download and colour swaps are a single shared material.
-- **Bounded interactive canvas.** Zoom lives in its own panel, so the mouse wheel only zooms inside the viewer and scrolls the page everywhere else.
+## 💡 Project Highlights
 
-## Performance and accessibility
+- Combines 3D product visualisation with modern frontend development.
+- Demonstrates scroll-based animation and interactive 3D rendering.
+- Uses procedural geometry instead of relying entirely on pre-made 3D assets.
+- Focuses on creating an engaging and cinematic product presentation.
 
-- **Code-splitting:** the 3D sections are lazy-loaded with `React.lazy`, so Three.js downloads separately (initial JS ≈ 115 kB gzipped).
-- **Rendering:** device pixel ratio is capped at 2 (`dpr={[1, 2]}`), and there's no HDR environment download (local lights only).
-- **Reduced motion:** `MotionConfig reducedMotion="user"` respects the OS setting, and the scroll timeline is skipped (text shown statically) when reduced motion is on.
-- **Semantics:** landmark sections and labelled regions, plus keyboard-focusable colour swatches with a visible focus ring.
->>>>>>> d342df7 (spatialverse)
+---
+
+*✨SpatialVerse — Explore products beyond the screen.✨*
